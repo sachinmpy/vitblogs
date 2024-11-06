@@ -1,0 +1,44 @@
+- document ver 1.0
+- last date changed 4 November, 2024
+
+=======================
+EXTERNAL PYTHON LIBRARY 
+=======================
+
+About this Document
+-------------------
+This document list out python libraries used in the project
+with short description. These libraries are required to run
+the  project. To install  the required libraries to run the 
+project refer to the Installation section. 
+
+
+Installation
+------------
+It  is recommended that you start a virtual environment for 
+the project and then install all the libraries in it.
+
+command  `pip install -r requirements.txt`
+
+if requirements.txt is  not  present  then  there something 
+wrong has gone and you must contact the  orignal  author of 
+the project to resolve this issue
+
+
+Libraries
+---------
+
+black  24.10.0
+--------------
+Not required to run the project. But is used for  auto  code 
+formatting.
+
+Django  5.1.2
+-------------
+It  is  the main framework used to build the project on.
+
+sqlparse  0.5.1
+---------------
+Dependency of django.  it i s a  non-validating SQL  parser 
+for Python.  It provides support for parsing, splitting and
+formatting SQL statements.
