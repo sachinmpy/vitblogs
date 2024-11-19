@@ -19,5 +19,9 @@ def create_blog(request):  # MISSING: documentation, function annotation
     pass
 
 
+def unverifed_blogs(request):  # MISSING: documentation, function annotation 
+    pass
+
+
 def verify_blog(request):  # MISSING: documentation, function annotation
     pass
