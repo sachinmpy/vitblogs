@@ -1,12 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
+# TODO
+# - Convert function based views to Class based views
+# - Proper Annotation and type hinting
 
 
-# Home Page
+def homepage(request):  # MISSING: documentation, function annotation
+    pass
 
 
-# About Page
-
-
-# Searching and Filters
+def aboutpage(request):  # MISSING: documentation, function annotation
+    pass

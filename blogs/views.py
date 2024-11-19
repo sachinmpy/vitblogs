@@ -1,21 +1,23 @@
 from django.shortcuts import render
 
-# Create your views here.
+# TODO
+# - Convert function based views to Class based views
+# - Proper Annotation and type hinting
+# - Add Likes and Dislike functionality
+# - Add Image upload, or make handling images seamless
 
 
-# Read Blog
+def blog_page(request):  # MISSING: documentation, function annotation
+    pass
 
 
-# Create Blog
+def blog(request, blog_id):  # MISSING: documentation, function annotation
+    pass
 
 
-# Verfiy Blog
+def create_blog(request):  # MISSING: documentation, function annotation
+    pass
 
 
-# Image Upload
-
-
-# Likes and Dislikes
-
-
-# 
+def verify_blog(request):  # MISSING: documentation, function annotation
+    pass

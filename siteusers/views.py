@@ -1,23 +1,34 @@
 from django.shortcuts import render
 
-# Create your views here.
+# TODO
+# - Convert function based views to Class based views
+# - Proper Annotation and type hinting
+# - Verify user email through inbox emails
 
 
-# Login
+def loginuser(request):  # MISSING: documentation, function annotation
+    pass
 
 
-# Register
+def logout(request):  # MISSING: documentation, function annotation
+    pass
 
 
-# Verify Emails
+def registeriser(request):  # MISSING: documentation, function annotation
+    pass
 
 
-# User Profile
+def user_profile(request, username):  # MISSING: documentation, function annotation
+    pass
 
 
-# User Profile Setting
+def user_profile_setting(request):  # MISSING: documentation, function annotation
+    pass
 
 
-# User Blogs
+def user_blogs(request, username):  # MISSING: documentation, function annotation
+    pass
 
 
+def verify_user_email():  # MISSING: documentation, function annotation
+    pass
