@@ -18,8 +18,8 @@ from .views import *
 urlpatterns = [
     path('users/login', loginuser, name='loginuser'),
     path('users/logout', logout, name='logout'),
-    path('users/register', register, name='register'),
-    path('users/<usr:str>/profile', user_profile, name='user_profile'),
-    path('users/<usr:str>/settings', user_profile_setting, name='user_profile_setting'),
-    path('users/<usr:str>/user-blogs', user_blogs, name='user_blogs'),
+    path('users/register', registeruser, name='register'),
+    path('users/<str:id>/profile', user_profile, name='user_profile'),
+    path('users/<str:id>/settings', user_profile_setting, name='user_profile_setting'),
+    path('users/<str:id>/user-blogs', user_blogs, name='user_blogs'),
 ]
