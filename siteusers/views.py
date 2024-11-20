@@ -14,7 +14,7 @@ def logout(request):  # MISSING: documentation, function annotation
     pass
 
 
-def registeriser(request):  # MISSING: documentation, function annotation
+def registeruser(request):  # MISSING: documentation, function annotation
     pass
 
 
