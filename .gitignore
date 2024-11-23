@@ -3,3 +3,6 @@ categories/__pycache__/*
 sitepages/__pycache__/*
 siteusers/__pycache__/*
 vitblogs/__pycache__/*
+
+siteusers/migrations/*
+db.sqlite3
