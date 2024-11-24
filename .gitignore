@@ -5,4 +5,5 @@ siteusers/__pycache__/*
 vitblogs/__pycache__/*
 
 siteusers/migrations/*
+blogs/migrations/*
 db.sqlite3
