@@ -13,6 +13,12 @@ Class-based views
 """
 
 from django.urls import path
+from .views import *
 
 urlpatterns = [
+    path('blogs', blog_page, name='blog_page'),
+    path('blogs/blog/<str:blog_id>', blog, name='blog'),
+    path('blogs/create-blog', create_blog, name='create_blog'),
+    path('blogs/unverified-blogs', unverifed_blogs, name='unverified_blogs'),
+    path('blogs/verify-blog', verify_blog, name='verify_blog'),
 ]

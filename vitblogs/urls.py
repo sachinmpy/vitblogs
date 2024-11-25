@@ -22,6 +22,6 @@ urlpatterns = [
     path('', include('blogs.urls')),
     path('', include('categories.urls')),
     path('', include('siteusers.urls')),
-    
+    path('', include('sitepages.urls')),
 ]
 

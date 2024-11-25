@@ -1,12 +1,34 @@
 from django.shortcuts import render
 
-# Create your views here.
+# Typing imports
+from django.http import HttpRequest
+from django.shortcuts import HttpResponse
+
+# TODO
+# - Convert function based views to Class based views
+# - Proper Annotation and type hinting
 
 
-# Home Page
+def homepage(request: HttpRequest) -> HttpResponse:
+    """
+    Homepage of the website
+
+    Parameters
+    ----------
+    request : HttpRequest
+        request captures http request response sent via urls
+
+    Returns
+    -------
+    HttpResponse
+        a HTML file
+    """
+
+    context: dict = {}
+
+    return render(request, "sitepages/home.html", context=context)
 
 
-# About Page
-
-
-# Searching and Filters
+# Note: This will be implemented later if needed, right now it does nothing
+def aboutpage(request):  # MISSING: documentation, function annotation
+    pass

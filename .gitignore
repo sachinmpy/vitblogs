@@ -1,4 +1,9 @@
-/blogs/_pycache_/
-/categories/_pycache_/
-/sitepages/_pycache_/
-/siteusers/_pycache_/
+blogs/__pycache__/*
+categories/__pycache__/*
+sitepages/__pycache__/*
+siteusers/__pycache__/*
+vitblogs/__pycache__/*
+
+siteusers/migrations/*
+blogs/migrations/*
+db.sqlite3

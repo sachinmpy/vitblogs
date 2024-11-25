@@ -1,14 +1,25 @@
 from django.shortcuts import render
 
-### Think Category as Subreddit
-
-# Create your views here.
-
-
-# Create Category
+# TODO
+# - Convert function based views to Class based views
+# - Proper Annotation and type hinting
 
 
-# Category Page
+def create_category(request):  # MISSING: documentation, function annotation
+    pass
 
 
-# Category Information
+def categories(request):  # MISSING: documentation, function annotation
+    pass
+
+
+def category_page(request):  # MISSING: documentation, function annotation
+    pass
+
+
+def add_to_category():  # MISSING: documentation, function annotation
+    pass
+
+
+def remove_from_category():  # MISSING: documentation, function annotation
+    pass
