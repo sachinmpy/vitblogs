@@ -22,7 +22,7 @@ def user_profile(request, username):  # MISSING: documentation, function annotat
     pass
 
 
-def user_profile_setting(request):  # MISSING: documentation, function annotation
+def user_profile_setting(request, username):  # MISSING: documentation, function annotation
     pass
 
 
