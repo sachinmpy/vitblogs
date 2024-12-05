@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from decorators import redirect_authenticated
+from django.contrib.auth.decorators import login_required
+from .models import Tags, Blog
+from .forms import BlogCreationForm
 
 # Typing imports
 from django.http import HttpRequest
@@ -56,7 +60,8 @@ def blog(request: HttpRequest, blog_id: str) -> HttpResponse:  # Not working
     return render(request, "blogs/blog.html", context=context)
 
 
-def create_blog(request: HttpRequest) -> HttpResponse:  # Not working
+@login_required(login_url="users/login")
+def create_blog(request: HttpRequest) -> HttpResponse:
     """
     this function will send webpage to user where they can create their blogs
 
@@ -71,7 +76,19 @@ def create_blog(request: HttpRequest) -> HttpResponse:  # Not working
         a HTML file
     """
 
-    context: dict = {}
+    user = request.user
+    form = BlogCreationForm(initial={"created_by": user}, instance=user)
+    context: dict = {"form": form}
+
+    # Reciving to create and save forms
+    if request.method == "POST":
+        form = BlogCreationForm(request.POST)
+
+        if form.is_valid():
+            pass
+
+        else:
+            pass
 
     return render(request, "blogs/createblog.html", context=context)
 
@@ -113,6 +130,4 @@ def verify_blog(request: HttpRequest) -> HttpResponse:  # Not working
 
     context: dict = {}
 
-    return render(
-        request, "blogs/unverifiedblogs.html", context=context
-    )
+    return render(request, "blogs/unverifiedblogs.html", context=context)
