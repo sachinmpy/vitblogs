@@ -4,7 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Todo
-# - Implement "TAGS" 
+# - Implement "TAGS"
+
 
 class Blog(models.Model):
     """
@@ -29,6 +30,18 @@ class Blog(models.Model):
     headline = models.CharField(max_length=70, null=False)
     is_approved = models.BooleanField(default=False)
     short_description = models.TextField(max_length=50, null=False)
+    tags = models.CharField(max_length=64, null=True)
 
     def __str__(self):
         return f"{self.headline[:15]} by: {self.blog_id}"
+
+
+class Tags(models.Model):
+    """
+    Tags hold unique tags
+    """
+
+    tag = models.CharField(max_length=16, unique=True)
+
+    def __str__(self):
+        return f"{self.tag}"
