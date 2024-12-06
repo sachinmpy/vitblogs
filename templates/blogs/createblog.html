@@ -1,1 +1,12 @@
 ASIF IS G.O.A.T
+
+<form action="{% url 'create_blog' %}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+    {% endfor %}
+    <button type="submit">HI</button>
+</form>

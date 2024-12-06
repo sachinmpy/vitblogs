@@ -1,25 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Category, CategoryList
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+
+# Typing imports
+from django.http import HttpRequest
+from django.shortcuts import HttpResponse
 
 # TODO
 # - Convert function based views to Class based views
 # - Proper Annotation and type hinting
 
 
-def create_category(request):  # MISSING: documentation, function annotation
-    pass
+def categories(request: HttpRequest) -> HttpResponse:
+    """ """
+
+    _categories = Category.objects.all()
+
+    context: dict = {"categories": _categories}
+
+    return render(request, "categories/categorypage.html", context=context)
 
 
-def categories(request):  # MISSING: documentation, function annotation
-    pass
+def category_page(request: HttpRequest, category_name: str) -> HttpResponse:
+    """ """
+    try:
+        _c = Category.objects.get(category=category_name)
 
+    except ObjectDoesNotExist as e:
+        messages.error(request, message=f"{category_name} does not exist")
+        return redirect("/")
 
-def category_page(request):  # MISSING: documentation, function annotation
-    pass
+    category_list = CategoryList.objects.filter(category_name=_c)
 
+    context: dict = {"cateogry": _c, "category_list": category_list}
 
-def add_to_category():  # MISSING: documentation, function annotation
-    pass
-
-
-def remove_from_category():  # MISSING: documentation, function annotation
-    pass
+    return render(request, "categories/categorylistpage.html", context=context)

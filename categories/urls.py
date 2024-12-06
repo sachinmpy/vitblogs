@@ -16,7 +16,9 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('categories/list', categories, name='categories'),
-    path('categories/category/<str:id>', category_page, name='category_page'),
-    path('categories/create_category', create_category, name='create_category'),
+    path("categories/list", categories, name="categories"),
+    path(
+        "categories/category/<str:category_name>", category_page, name="category_page"
+    ),
+    # path('categories/create_category', create_category, name='create_category'),
 ]

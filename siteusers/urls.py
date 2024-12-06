@@ -16,10 +16,13 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('users/login', loginuser, name='loginuser'),
-    path('users/logout', logoutuser, name='logoutuser'),
-    path('users/register', registeruser, name='register'),
-    path('users/<str:username>/profile', user_profile, name='user_profile'),
-    path('users/<str:username>/settings', user_profile_setting, name='user_profile_setting'),
-    path('users/<str:username>/user-blogs', user_blogs, name='user_blogs'),
+    path("users/login", loginuser, name="loginuser"),
+    path("users/logout", logoutuser, name="logoutuser"),
+    path("users/register", registeruser, name="register"),
+    path("users/<str:username>/profile", user_profile, name="user_profile"),
+    path(
+        "users/<str:username>/settings",
+        user_profile_setting,
+        name="user_profile_setting",
+    ),
 ]
