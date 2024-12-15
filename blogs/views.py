@@ -5,7 +5,8 @@ from .models import Tags, Blog
 from .forms import BlogCreationForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-
+from images_urls import get_random_image
+from categories.models import Category, CategoryList
 
 # Typing imports
 from django.http import HttpRequest
@@ -34,7 +35,9 @@ def blog_page(request: HttpRequest) -> HttpResponse:  # Not Working
         a HTML file
     """
 
-    context: dict = {}
+    _blogs = Blog.objects.filter(is_approved=True).exclude(is_archived=True)
+
+    context: dict = {"blogs": _blogs,  "image_func": get_random_image}
 
     return render(request, "blogs/allblogs.html", context=context)
 
@@ -60,7 +63,7 @@ def blog(request: HttpRequest, blog_id: str) -> HttpResponse:
 
     _blog = Blog.objects.get(blog_id=blog_id)
 
-    context: dict = {"blog": _blog}
+    context: dict = {"blog": _blog, "image_func": get_random_image}
 
     return render(request, "blogs/blog.html", context=context)
 
@@ -83,25 +86,33 @@ def create_blog(request: HttpRequest) -> HttpResponse:
 
     user = request.user
     form = BlogCreationForm(
-        initial={"created_by": user}, instance=user
-    )  # Bug: Not Working
+        {"create_by": user}
+    )
+
     context: dict = {"form": form}
+
+    
 
     # Reciving to create and save forms
     if request.method == "POST":
         form = BlogCreationForm(request.POST)
         form_tags = request.POST["tags"]
-
         # cleans tags, adds new tags that are already not present
         # in the tags list
         cleaned_tags = handle_tags(form_tags)
 
+        # Checking for category
+        category_tag = request.POST["category"]
+        _category = Category.objects.get(pk=int(category_tag))
+
         if form.is_valid():
-            pass
-
+            f = form.save()
+            CategoryList.objects.create(category_name=_category, blog=f)
+            messages.success(request, "Blog has been posted")
+            return redirect("blog_page")
         else:
-            pass
-
+            messages.error(request, "Something went wrong")
+            return redirect("create_blog")
     return render(request, "blogs/createblog.html", context=context)
 
 
@@ -118,6 +129,8 @@ def handle_tags(tags: str) -> None:
     -------
     None
     """
+    if not tags:
+        return ""
 
     all_tags = Tags.objects.all()
     tags = tags.split(" ")
@@ -127,16 +140,17 @@ def handle_tags(tags: str) -> None:
     for tag in tags:
         if len(tag.strip()) > 16:
             continue
-
-        if tag[1] == "#":
-            cleaned_tags.append(tag.strip()[1:])
+        tag = tag.strip()
+        if tag[0] == "#":
+            cleaned_tags.append(tag[1:])
 
     # Saving Cleaned tags that are new
     for cleaned_tag in cleaned_tags:
         if cleaned_tag not in all_tags:
             Tags(tag=cleaned_tag).save()
 
-    return cleaned_tags
+    k = " ".join(cleaned_tags)
+    return k
 
 
 @login_required(login_url="loginuser")
@@ -158,7 +172,7 @@ def unverifed_blogs(request: HttpRequest) -> HttpResponse:
 
     _unverified_blogs = Blog.objects.filter(is_approved=False)
 
-    context: dict = {"unverified_blogs": _unverified_blogs}
+    context: dict = {"blogs": _unverified_blogs, "image_func": get_random_image}
 
     return render(request, "blogs/unverifiedblogs.html", context=context)
 
@@ -202,4 +216,48 @@ def verify_blog(
     _blog.save()
 
     messages.success(request, message=f"Blog Approved by {request.user}")
+    return redirect("unverified_blogs")
+
+
+@login_required(login_url="loginuser")
+@redirect_non_staff
+def archive_blog(
+    request: HttpRequest, blog_id: str
+) -> HttpResponseRedirect:  # Not working
+    """
+    function that will archive blog 
+
+    Parameters
+    ----------
+    request : HttpRequest
+        request captures http request response sent via urls
+
+    Returns
+    -------
+    HttpResponse
+        a HTML file
+    """
+
+    if not request.user.is_authenticated:
+        return redirect("/")
+
+    try:
+        _blog = Blog.objects.get(blog_id=blog_id)
+
+    except ObjectDoesNotExist as e:
+        messages.error(request, message="Blog does not exist")
+        return redirect("/")
+
+    # if blog is already approved by someone
+    # redirct them to the original page
+    if _blog.is_archived:
+        messages.error(request, message="Error? Blog was already archived")
+        return redirect("unverified_blogs")
+
+    _blog.is_archived = True
+    _blog.is_approved = True
+    _blog.approved_by = request.user
+    _blog.save()
+
+    messages.success(request, message=f"Blog Archived by {request.user}")
     return redirect("unverified_blogs")

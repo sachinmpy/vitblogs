@@ -1,16 +1,17 @@
 from django import forms
+
 from .models import User, UserProfile
 
 
-class UserCreationForm(forms.Form):
+class UserCreationForm(forms.ModelForm):
     """ """
 
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ("username", "email", "password")
 
 
-class UserProfileForm(forms.Form):
+class UserProfileForm(forms.ModelForm):
     """ """
 
     class Meta:
@@ -18,7 +19,7 @@ class UserProfileForm(forms.Form):
         fields = "__all__"
 
 
-class UserLoginForm(forms.Form):
+class UserLoginForm(forms.ModelForm):
     """ """
 
     class Meta:

@@ -30,10 +30,10 @@ def redirect_non_staff(view_function: callable) -> callable:
 
     def wrapper_func(request: HttpRequest, *args, **kwargs) -> callable:
         if request.user.is_staff:
-            messages.warning(request, message="NOT PERMITTED!")
             return view_function(request, *args, **kwargs)
 
         else:
+            messages.warning(request, message="NOT PERMITTED!")
             return redirect("/")
 
     return wrapper_func

@@ -1,12 +1,151 @@
-ASIF IS G.O.A.T
+{% extends 'bases/mainbase.html' %}
+{% block body %}
 
-<form action="{% url 'create_blog' %}" method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
+
+
+<style>
+        .button-container { /* container for buttons */
+        display: flex;
+        justify-content: center; 
+        align-items: center;   
+        height: 100px;         
+    }
+    .btn-primary { /* buttons */
+        color: black;
+        background-color: #8CA7EC !important;
+        border: 1px solid black;
+        height: 40px;
+        width: 135px;
+        margin-top: 30px !important;
+
+    }
+    .mini-container { /* for the 'already have an account?' text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    font-size: 15px;
+}
+    .text-box {
+    width: 190px;                
+    height: 50px;               
+    display: flex;               
+    justify-content: center;     
+    align-items: center;         
+    border: 1px solid black;    
+    border-radius: 2px; 
+    background-color: white;  
+    text-align: center;  
+}
+.text-box p {
+    margin: 0;
+}
+.custom-container {
+    max-width: 725px; 
+    margin: 0 auto; 
+    align-items: center;
+    margin-top: 40px;
+    padding: 0px;
+    font-family: 'Fira Code';
+}
+.custom-line {
+width: 100%; 
+border: none; 
+border-top: 2px solid black;
+margin: 20px 0; 
+}
+.custom-container-4-nevermissanewpost {
+max-width: 725px; 
+margin: 0 auto; 
+align-items: center;
+margin-top: 50px;
+margin-bottom: 50px;
+padding: 0px;
+font-family: 'Fira Code';
+}
+.form-label {
+font-size: 10px !important;
+}
+.form-control {
+border-bottom: 1px solid black !important;
+border-top: 0 !important;
+border-left: 0 !important;
+border-right: 0 !important;
+border-radius: 0px !important;
+margin-bottom: 20px;
+}
+.btn {
+font-size: 13px !important;
+}
+a{
+text-decoration: none;
+}
+#f{
+    border: 1px solid black; border-radius: 2px; 
+}
+#f:hover {
+    box-shadow: 7px 7px 0px 3px #575757;
+
+    border-radius: 0px;
+    /* border-bottom: 5px solid black; border-radius: 2px; */
+    }
+
+#b{
+    border-left-style: solid;border-left-width: 1px;border-top-style: solid;border-top-width: 1px;border-right-style: solid;border-right-width: 1px;border-bottom-style: solid;border-bottom-width: 0px;
+}
+</style>
+
+
+
+<div class="custom-container">
+    <div class="mb-3">
+        <h1>CREATE BLOGS</h1>
     </div>
-    {% endfor %}
-    <button type="submit">HI</button>
-</form>
+    
+
+    {% load widget_tweaks %}
+    <form action="{% url 'create_blog' %}" method="post" class="mx-1 mx-md-4 p-3">
+        {% csrf_token %}
+        
+        <!-- <h1 class="h3">Headline for your Blog </h1> -->
+        <div class="form-outline mb-4" id="b">
+             {% render_field form.headline class+='form-control p-3 fs-6' placeholder='Headline'%}
+        </div>
+
+
+        <span class="h4">Introduction</span> <span class="text-muted">250 character limit  </span>
+        <div class="form-outline mb-4" id="b" >
+            {% render_field form.short_description class+='form-control p-3 fs-6' placeholder+='This will be first shown to user, write something that generates interest in the blog post' type='text-area' %}
+        </div>
+
+        <span class="h4">Content</span> <span class="text-muted"> learn more on how to use </span> <a href="#">click here </a> 
+        <div class="form-outline mb-4">
+            {{form.media}}
+             {% render_field form.content class+='form-control p-3 fs-6' %}
+        </div>
+        
+        <span class="h5">Tags</span> <span class="text-muted">Use # symbol</span>
+        <div class="form-outline mb-4" id="b">
+            {% render_field form.tags class+='form-control p-3 fs-6' placeholder='tags'%}
+        </div>
+
+        <span class="h5">Category</span>
+        <div class="form-outline mb-4" id="b">
+            {% render_field form.category class+='form-control p-3 fs-6'%}
+        </div>
+
+        <div class="form-outline">
+            {% render_field form.create_by class+='form-select invisible'%}
+        </div>
+        
+        <button type="submit" style="width: 300px;" class="btn btn-outline-dark">PUBLISH</button>
+
+    </form>
+    
+    
+    
+</div>
+
+
+
+{% endblock %}

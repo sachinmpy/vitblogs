@@ -1,1 +1,178 @@
-<h1>HI</h1>
+{% extends 'bases/mainbase.html' %}
+
+
+{% block body %}
+        <!-- Featured Post -->
+        <style>
+        .custom-container {
+            max-width: 725px; 
+            margin: 0 auto; 
+            align-items: center;
+            margin-top: 40px;
+            padding: 0px;
+            font-family: 'Fira Code';
+        }
+        .text-box {
+            width: 190px;                
+            height: 50px;               
+            display: flex;               
+            justify-content: center;     
+            align-items: center;         
+            border: 1px solid black;    
+            border-radius: 2px; 
+            background-color: white;  
+            text-align: center;  
+        }
+        .text-box p {
+            margin: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        #f{
+            border: 1px solid black; border-radius: 2px; 
+            height: 300px;
+            transition: 200ms;
+            transition-delay: 1s;
+            transition: .2s ease-in-out;
+        }
+        #f:hover {
+            left: -10px;
+            top: -10px;
+            box-shadow: 5px 5px 0px 0px #ffbfbf, 10px 10px 0px 0px #cbffbb, 15px 15px 0px 0px #aad6ff;
+            border-radius: 0px;
+            }
+        </style>
+        
+        <div class = "container custom-container">
+        <div class = "text-box" style = "background-color: #a7b8e2;">
+            <p style = "font-size: 18px;">
+                FEATURED POST
+            </p>
+        </div>
+
+        <!-- Image -->
+        <div class="content-container">
+            <style>
+                .img-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .img-fluid {
+                    margin-top: 20px;
+                    border: 1px solid black;
+                    width: 724px;
+                    border-radius: 2px
+                }
+            </style>
+            
+            <div class="img-container">
+                <img src="https://img.freepik.com/premium-vector/business-people-together-hold-blank-banner-designed-corporate-advertising-commercial-offer_160308-6744.jpg" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+        <!-- Image -->
+
+        <div class="card mt-4" style = "border: 1px solid black; border-radius: 2px; background-color: #FFFDF1;">
+            <div class="card-body">
+                <h5 class="card-title" style = "font-size: 10px; margin-bottom: 18px; color: #545454;">March 23, 2024 • 3 min read</h5>
+                <h6 class="card-subtitle" style = "font-size: 25px; margin-bottom: 8px;">How I cracked the Placements at VITAP?</h6>
+                <p class="card-text" style = "font-size: 14px">As I stood in front of the bustling campus of VITAP, my heart raced with a mix of anxiety and excitement. Cracking the placements felt monumental, and it all began with my decision to join study groups and attend every workshop available.</p>
+            </div>
+            </div>
+        </div>
+        <!-- Featured Post -->
+
+        <!-- Never Miss a New Post -->
+        <style>
+            .custom-line {
+                width: 100%; 
+                border: none; 
+                border-top: 2px solid black;
+                margin: 20px 0; 
+            }
+            .custom-container-4-nevermissanewpost {
+                max-width: 725px; 
+                margin: 0 auto; 
+                align-items: center;
+                margin-top: 50px;
+                margin-bottom: 50px;
+                padding: 0px;
+                font-family: 'Fira Code';
+            }
+            .form-label {
+                font-size: 10px !important;
+            }
+            .form-control {
+                border-bottom: 1px solid black !important;
+                border-top: 0 !important;
+                border-left: 0 !important;
+                border-right: 0 !important;
+                border-radius: 0px !important;
+                margin-bottom: 20px;
+            }
+            .btn {
+                font-size: 13px !important;
+            }
+        </style>
+        <hr class="custom-line">
+
+        <div class="custom-container-4-nevermissanewpost d-flex justify-content-between align-items-center">
+            <h3>Never miss a new post.</h3>
+        
+            <form class="form-inline">
+                <div>
+                    <label for="inputEmail" class="form-label">Enter your email *</label>
+                    <input type="email" class="form-control" id="inputEmail" />
+                </div>
+                <button type="submit" class="btn btn-outline-dark">Subscribe</button>
+            </form>
+        </div>
+
+        <hr class="custom-line">
+        <!-- Never Miss a New Post -->
+
+        <!-- More Blogs -->
+        <div class = "container custom-container">
+        <div style = "font-size: 20px;">
+            MORE BLOGS
+        </div>
+        <div class="container" style="margin-top: 30px;">
+            <div class="row">
+
+                {% for blog in blogs %}
+                <!-- First card -->
+                <div class="col-md-6" style="padding-left: 0 !important; padding-right: 30px;">
+                    <a href="{% url 'blog' blog.blog_id %}">
+                <div class="card mb-5 " id="f" >
+                    <div class="row g-0">
+                    <div class="col-md-4">
+                        <img
+                        src="{{image_func}}"
+                        alt="Trendy Pants and Shoes"
+                        class="mt-5 ms-1 object-cover object-center card-img-top rounded-0 border-bottom border-dark"
+                        style="border: none; border-radius: 0px; height:auto;"
+                        />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title" style = "font-size: 10px; margin-bottom: 18px; color: #545454;">{{blog.created_on}}</h5>
+                        <h6 class="card-subtitle" style = "font-size: 18px; margin-bottom: 8px; ">{{blog.headline}}</h6>
+                        <p class="card-text" style = "font-size: 12px;;">{{blog.short_description | truncatechars:150}}</p>
+                        <hr style="text-align:left; margin-left:0; color: black; background-color: black;">
+                        <div style="display: flex; justify-content: flex-end;">
+                            <h6>by : {{blog.create_by}}</h6>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                    </a>
+                </div>
+                {% endfor %}
+                </div>
+                </div>
+                </div>
+                
+            
+{% endblock %}

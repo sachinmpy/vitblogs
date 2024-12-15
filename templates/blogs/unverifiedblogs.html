@@ -1,1 +1,115 @@
-G A N _ _ _
+{% extends "bases/mainbase.html" %}
+
+{% block body %}
+
+<style>
+            .text-box {
+            width: 190px;                
+            height: 50px;               
+            display: flex;               
+            justify-content: center;     
+            align-items: center;         
+            border: 1px solid black;    
+            border-radius: 2px; 
+            background-color: white;  
+            text-align: center;  
+        }
+        .text-box p {
+            margin: 0;
+        }
+    .custom-container {
+            max-width: 725px; 
+            margin: 0 auto; 
+            align-items: center;
+            margin-top: 40px;
+            padding: 0px;
+            font-family: 'Fira Code';
+        }
+    .custom-line {
+        width: 100%; 
+        border: none; 
+        border-top: 2px solid black;
+        margin: 20px 0; 
+    }
+    .custom-container-4-nevermissanewpost {
+        max-width: 725px; 
+        margin: 0 auto; 
+        align-items: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding: 0px;
+        font-family: 'Fira Code';
+    }
+    .form-label {
+        font-size: 10px !important;
+    }
+    .form-control {
+        border-bottom: 1px solid black !important;
+        border-top: 0 !important;
+        border-left: 0 !important;
+        border-right: 0 !important;
+        border-radius: 0px !important;
+        margin-bottom: 20px;
+    }
+    .btn {
+        font-size: 13px !important;
+    }
+    a{
+        text-decoration: none;
+    }
+    #f{
+            border: 1px solid black; border-radius: 2px; 
+            height: 500px;
+            transition: 200ms;
+            transition-delay: 1s;
+            transition: .2s ease-in-out;
+        }
+        #f:hover {
+            left: -10px;
+            top: -10px;
+            box-shadow: 5px 5px 0px 0px #ffbfbf, 10px 10px 0px 0px #cbffbb, 15px 15px 0px 0px #aad6ff;
+            border-radius: 0px;
+            }
+
+</style>
+
+<div class="custom-container">
+
+<div class="mb-3">
+    <h1>UNVERFIED BLOGS</h1>
+</div>
+
+<hr class="custom-line">
+
+<div class="row row-cols-3 row-cols-md-2 g-5 mt-2">
+    {% for blog in blogs %}
+    <div class="col rounded-0 ">
+        <div class="card rounded-0 border border-dark" id="f"  style="" >
+        <div class="p-2" style="border-bottom: 1px solid blak;">
+            {{blog.created_on}}
+        </div>
+        
+        <img src="{{image_func}}" class="object-cover object-center card-img-top rounded-0 border-bottom border-dark" style="object-fit: cover; max-height: 200px;">
+        
+        <div class="card-body">
+            <div class="p-1">
+                <a href="{% url 'blog' blog.blog_id %}" class="fw-bolder text-black" style = "font-size: 18px; margin-bottom: 8px; "><span class="card-title h5">{{blog.headline | truncatechars:64}}</span></a>
+            </div>
+            <hr>
+            <p class="card-text" style = "font-size: 12px;;">
+                {{blog.short_description | truncatechars:250}}
+            </p>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+</div>
+</div>
+
+<div class="md-5" style="height: 20px;">
+
+{% endblock %}

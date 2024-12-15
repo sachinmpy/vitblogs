@@ -1,0 +1,92 @@
+{% extends 'bases/mainbase.html' %}
+
+
+{% block body %}
+
+<style>
+    .custom-container {
+        max-width: 725px; 
+        margin: 0 auto; 
+        align-items: center;
+        margin-top: 40px;
+        padding: 0px;
+        font-family: 'Fira Code';
+        border: none
+    }
+    .text-box {
+        width: 190px;                
+        height: 50px;               
+        display: flex;               
+        justify-content: center;     
+        align-items: center;         
+        border: 1px solid black;    
+        border-radius: 2px; 
+        background-color: white;  
+        text-align: center;  
+    }
+    .text-box p {
+        margin: 0;
+    }
+    a{
+        text-decoration: none;
+    }
+    #f{
+            border: 1px solid black; border-radius: 2px; 
+            height: 500px;
+            transition: 200ms;
+            transition-delay: 1s;
+            transition: .2s ease-in-out;
+        }
+        #f:hover {
+            left: -10px;
+            top: -10px;
+            box-shadow: 5px 5px 0px 0px #ffbfbf, 10px 10px 0px 0px #cbffbb, 15px 15px 0px 0px #aad6ff;
+            border-radius: 0px;
+            }
+
+    </style>
+
+
+<div class="card mb-3 rounded-0 custom-container">
+          <p class="card-text">
+                {{category.category_description}}
+            </p>
+
+  </div>
+
+
+<div class="custom-container">
+
+    <div class="mb-3">
+        <span class="text-muted">blogs by</span>
+        <h2>{{category.category}}</h2>
+    </div>
+
+    <hr>
+    <div class="row row-cols-3 row-cols-md-2 g-5" style="min-height: 100px;">
+    {% for blog in category_list %}
+    <div class="col rounded-0 ">
+        <div class="card rounded-0 border border-dark" id="f"  style="" >
+        <div class="p-2" style="border-bottom: 1px solid blak;">
+            {{blog.blog.created_on}}
+        </div>
+        
+        <img src="{{image_func}}" class="object-cover object-center card-img-top rounded-0 border-bottom border-dark" style="object-fit: cover; max-height: 200px;">
+        
+        <div class="card-body">
+            <div class="p-1">
+                <a href="{% url 'blog' blog.blog.blog_id %}" class="fw-bolder text-black" style = "font-size: 18px; margin-bottom: 8px; "><span class="card-title h5">{{blog.blog.headline | truncatechars:64}}</span></a>
+            </div>
+            <hr>
+            <p class="card-text" style = "font-size: 12px;;">
+                {{blog.blog.short_description  | truncatechars:250}}
+            </p>
+        </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

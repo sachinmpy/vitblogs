@@ -3,10 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from .models import User, UserProfile
-from blogs.models import Blog
-from .forms import UserCreationForm, UserProfileForm, UserLoginForm
 from decorators import redirect_authenticated, redirect_unknown_user
+from blogs.models import Blog
+from .models import User, UserProfile
+from .forms import UserCreationForm, UserProfileForm, UserLoginForm
 
 # Typing Imports
 from django.http import HttpResponse, HttpRequest
@@ -33,12 +33,11 @@ def loginuser(request: HttpRequest) -> HttpResponse:
     """
 
     form = UserLoginForm()
-
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(username=username, password=password)
-
+        print(user)
         # proceed to login if user is authenticated
         if user is not None:
             login(request, user)
@@ -47,7 +46,6 @@ def loginuser(request: HttpRequest) -> HttpResponse:
 
         # sends error if not able to login
         messages.error(request, "username or password is wrong")
-
     context: dict = {"form": form}
     return render(request, "siteusers/login.html", context=context)
 
@@ -92,9 +90,17 @@ def registeruser(request: HttpRequest) -> HttpResponse:
 
     if request.method == "POST":
         form = UserCreationForm(request.POST)
-
+        print(request.POST)
         if form.is_valid():
-            pass  # IMPLEMENT THIS FUTURE ME
+            messages.success(request, message=f"Account Has Been Created")
+            _u = form.save(commit=False)
+            _u.set_password(form.cleaned_data['password'])
+            _u.save()
+            return redirect("loginuser")  # IMPLEMENT THIS FUTURE ME
+
+        else:
+            messages.error(request, message="Something Went Wrong! maybe username has been already taken")
+            return redirect("register")
 
     context: dict = {
         "form": form,

@@ -1,13 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    
 
+<!DOCTYPE html>
+<html lang = "eng">
+    <head>
+        <title>
+            Canary for VIT
+        </title>
+        <!-- Styles, Fonts and Links -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+        crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    </head>
+
+
+<body>
+    <!-- Navigation Bar -->
+    <style>
+        .navbar-custom { /* to override bootstrap's default navbar color */
+            background-color: #E9EFFF !important;
+            border-bottom: 1px solid black;
+        }
+        .container-fluid { /* making sure that the nav-bar items stay within the container without disturbing the bar */
+            max-width: 750px;
+        }
+
+
+        .vh-100 { /* main container */
+        background-color: white; 
+        font-family: Fira Code; 
+        font-weight: 400;
+    }
+    .col-md-10 { /* form box */
+        border: 1px solid rgb(0, 0, 0) !important;
+        border-radius: 3px;
+        padding: 40px 0px 40px 0px;
+        width: 600px; 
+    }
+    .d-flex { /* form text-box */
+        margin-bottom: 30px !important; 
+        margin-right: 38px; 
+        margin-left: 25px;
+    }
+    #form3Example4c { /* form text-box borders */
+        border-bottom: 1px solid black !important;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        border-radius: 0px !important;
+        padding: 10px 30px !important; 
+        padding-left: 0px !important;
+    }
+
+    </style>
+
+    {% block navbar %}
+      {% if request.user.is_authenticated and request.user.is_staff %}
+        {% include "bases/headerganesh.html" %}
+      {% elif request.user.is_authenticated %}
+        {% include "bases/header.html" %}
+      {% else %}
+        {% include "bases/headerasif.html" %}
+      {% endif %}
+
+    {% endblock %}
+    <!-- Navigation Bar -->
+
+    {%  for message in messages %}
+            <div class="error-messages p-3 border border-warning" style="background-color: rgb(252, 245, 190);">
+              <div class="container-fluid">
+                {{message | capfirst}}
+              </div>
+            </div>
+    {% endfor %}
+    
+<div class="main-containtent">
+    {% block body %}
+    
+    {% endblock %}
+</div>
+
+
+
+<!-- Footer -->
+<style>
+    .footer {
+        margin-top: 10px;
+        font-family: 'Fira Code';
+    }
+    .bg-body-tertiary { 
+        border-top: 1px solid black;
+    }
+</style>
+<div class="footer">
+    <footer class="bg-body-tertiary text-center" style="background-color: #FFFDF1 !important;">
+      <!-- Grid container -->
+      <div class="container p-4">
+        <!--Grid row-->
+        <div class="row justify-content-center">
+            <!--Grid column-->
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0 position-relative" style="height: 125px;">
+              <div style="position: absolute; bottom: 0; left: 0; text-align: left; font-size: 15px;">
+                <h5 class="text-uppercase"></h5>
+                <p>
+                  <i>Made for VITAP by Sachin, Ganesh & Asif.</i>
+                </p>
+              </div>
+            </div>
+            <!--Grid column-->
+    
+            <!--Grid column-->
+            <style>
+              .text-body {
+                  text-decoration: none !important;
+              }
+            </style>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-right" style="text-align: right !important; font-size: 15px;">          
+              <ul class="list-unstyled" style="margin-bottom: 5px !important; margin-top: 10px;">
+                <li style="margin-bottom: 15px !important;">
+                  <a href="#!" class="text-body">Blogs</a>
+                </li>
+                <li style="margin-bottom: 15px !important;">
+                  <a href="#!" class="text-body">Subscribe</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-body">Join</a>
+                </li>
+              </ul>
+            </div>
+            <!--Grid column-->
+          </div>
+        <!--Grid row-->
+      </div>
+      <!-- Grid container -->
+  
+      <!-- Copyright -->
+      <!-- <div class="text-center p-3" style="background-color: #fff9d9; border-top: 1px solid black;">
+        <a class="text-body" style="text-decoration: none;">Canary for VITAP</a>
+      </div> -->
+      <!-- Copyright -->
+    </footer>
+</div>    
+<!-- Footer -->  
 </body>
 </html>

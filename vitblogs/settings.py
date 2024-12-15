@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,7 +42,14 @@ INSTALLED_APPS = [
     "categories",
     "siteusers",
     # Installed Apps
+
+    "crispy_forms",
+    "widget_tweaks",
+    "django_browser_reload",
+    'django_prose_editor',
+    'ckeditor'
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -127,3 +133,8 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'width': 'full', 
+    },
+}
