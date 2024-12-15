@@ -32,61 +32,64 @@
     }
     #f{
             border: 1px solid black; border-radius: 2px; 
-            height: 500px;
             transition: 200ms;
             transition-delay: 1s;
-            transition: .2s ease-in-out;
+            transition: .1s ease-in-out;
         }
         #f:hover {
-            left: -10px;
-            top: -10px;
+            left: -7px;
+            top: -7px;
             box-shadow: 5px 5px 0px 0px #ffbfbf, 10px 10px 0px 0px #cbffbb, 15px 15px 0px 0px #aad6ff;
             border-radius: 0px;
             }
-
     </style>
 
 
 <div class="card mb-3 rounded-0 custom-container">
-          <p class="card-text">
-                {{category.category_description}}
-            </p>
+    <div class="row g-0">
 
+      <div class="col-md-8">
+        <div class="card-body">
+          <p class="card-text">
+
+            Discover everything VIT-AP has to offer through our blog, where we share news, updates, and insights for students, alumni, and visitors. Whether you’re looking for academic tips, alumni success stories, or campus happenings, you’ll find it all here.
+            </p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk5XO2-d9TuVt-xPXVD70QVbnYP9Mb2lbYZg&s" class="img-fluid p-3" alt="Yo">
+      </div>
+    </div>
   </div>
 
 
 <div class="custom-container">
 
     <div class="mb-3">
-        <span class="text-muted">blogs by</span>
-        <h2>{{category.category}}</h2>
+        <h2>CATEGORIES</h2>
     </div>
 
+    
     <hr>
-    <div class="row row-cols-3 row-cols-md-2 g-5" style="min-height: 100px;">
-    {% for blog in category_list %}
-    <div class="col rounded-0 ">
-        <div class="card rounded-0 border border-dark" id="f"  style="" >
-        <div class="p-2" style="border-bottom: 1px solid blak;">
-            {{blog.blog.created_on}}
+    
+    {% for category in categories %}
+    <a href="{% url 'category_page' category.category %}">
+    <div class="col rounded-0 mb-3">
+        <div class="card rounded-0 border border-dark" id="f">
+        <div class="p-2" style="border-bottom: 1px solid blak; background-color: rgb(226, 255, 245); font-weight: bold;">
+            {{category.category|capfirst}}
         </div>
-        
-        <img src="{{image_func}}" class="object-cover object-center card-img-top rounded-0 border-bottom border-dark" style="object-fit: cover; max-height: 200px;">
-        
         <div class="card-body">
-            <div class="p-1">
-                <a href="{% url 'blog' blog.blog.blog_id %}" class="fw-bolder text-black" style = "font-size: 18px; margin-bottom: 8px; "><span class="card-title h5">{{blog.blog.headline | truncatechars:64}}</span></a>
-            </div>
-            <hr>
-            <p class="card-text" style = "font-size: 12px;;">
-                {{blog.blog.short_description  | truncatechars:250}}
+            <p class="card-text" style = "font-size: 12px; max-width: 500px;">
+                {{category.category_description}}
             </p>
         </div>
         </div>
     </div>
-    
+    </a>
+
     {% endfor %}
-    </div>
 
 </div>
 {% endblock %}

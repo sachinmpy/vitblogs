@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from blogs.models import Blog
+from images_urls import get_random_image
 # Typing imports
 from django.http import HttpRequest
 from django.shortcuts import HttpResponse
@@ -24,7 +25,9 @@ def homepage(request: HttpRequest) -> HttpResponse:
         a HTML file
     """
 
-    context: dict = {}
+    _blogs = Blog.objects.filter(is_approved=True).exclude(is_archived=True)[:5]
+    _urls = [get_random_image() for i in range(5)]
+    context: dict = {"blogs": _blogs, "image_func": get_random_image}
 
     return render(request, "sitepages/home.html", context=context)
 

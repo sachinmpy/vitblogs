@@ -10,6 +10,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto"> <!-- ms-auto pushes the links to the right and the logo to the left -->
             <li class="nav-item">
+            <a class="nav-link" href="{% url 'unverified_blogs' %}" style="color: rgb(255, 71, 71);">Unverified Blogs</a>
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="{% url 'homepage' %}">Home</a>
             </li>
             <li class="nav-item">
@@ -19,7 +22,7 @@
             <a class="nav-link" href="{% url 'categories' %}">Categories</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'logoutuser' %}">Logout</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'logoutuser' %}">Logout</a>
             </li>
         </ul>
         </div>

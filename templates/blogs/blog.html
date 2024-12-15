@@ -1,1 +1,150 @@
-blog
+{% extends 'bases/mainbase.html' %}
+
+
+{% block body %}
+
+        <!-- Image -->
+        <div class="content-container">
+            <style>
+                .img-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .img-fluid {
+                    margin-top: 40px;
+                    border: 1px solid black;
+                    width: 720px;
+                }
+            </style>
+            
+            <div class="img-container">
+                <img src="{{image_func}}" class="img-fluid" alt="Responsive image" style="object-fit:cover; height: 600px;">
+            </div>
+        </div>
+        <!-- Image -->        
+        <!-- Content -->
+        <style>
+            .two-column-container {
+                font-family: 'Fira Code';
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center; 
+                width: 750px; 
+                margin-top: 35px;
+            }
+        
+            .column-left {
+                text-align: left; 
+                font-size: 15px;
+            }
+            .outer-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 80vh; /* Ensures centering based on viewport height */
+                font-family: 'Fira Code';
+            }
+
+            .inner-container {
+                max-width: 750px; /* Constrains width of the content */
+                margin: 0 auto;
+                padding: 20px; /* Optional padding for better spacing */
+            }
+
+            .content {
+                text-align: justify;
+            }
+            .btn {
+                font-size: 13px !important;
+            }
+            li a{
+                text-decoration: none;
+            }
+            li {
+                list-style: none;
+            }
+        </style>
+        {% if request.user.is_staff and not blog.is_approved%}
+            <div class="inner-container" style="margin-bottom: 0px;">
+                    <a href="{% url 'verify_blog' blog.blog_id %}" class="btn btn-outline-success">Approve</a>
+                    <a href="{% url 'archive_blog' blog.blog_id %}" class="btn btn-outline-danger">Archive</a>
+            </div>
+        {% endif %}
+        <div class="outer-container">
+            <div class="inner-container">
+                <div class="two-column-container">
+                    <div class="column-left">
+                        <p>{{blog.created_on}}</p>
+                    </div>
+                    <!-- <div class="column-right">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart" viewBox="0 0 16 16">
+                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                            </svg>
+                        </div>
+                    </div> -->
+                </div>
+
+                <style>
+                    .title {
+                        font-family: Fira Code;
+                    }
+                    .another-container {
+                        font-family: 'Fira Code';
+                        /* display: flex;  */
+                        /* justify-content: space-between;  */
+                        /* align-items: left;  */
+                        width: 724px; 
+                        margin-top: 0px;
+                        text-align: left;
+                    }
+                    .custom-line {
+                        position: relative;
+                        width: 80vw; /* Full width of the viewport */
+                        margin: 0; /* Remove default margins */
+                        border: none; /* Remove default border styles */
+                        border-top: 2px solid #000; /* Add your custom border style */
+                        left: 50%; /* Center align the HR */
+                        transform: translateX(-50%);
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                    }
+                    .content {
+                        font-family: Fira Code;
+                    }
+
+                </style>
+                <div class="another-container">
+                    <h3 class="title">{{blog.headline}}</h3>
+                </div>
+
+                <hr class="custom-line">
+
+                <style>
+                    p img {
+                        max-width: 550px;
+                        object-fit: contain;
+                        position: relative;
+                        left: -25px;
+                    }   
+
+                </style>
+
+                <div class="another-container" style="width: 500px; text-align: justify; margin-top: 30px;">
+                    <p class="content" style="text-wrap:pretty;">
+                        {{blog.content|safe}}
+                    </p>
+                </div>
+
+                <hr class="custom-line">
+
+                <div class="another-container">
+                    <h5 class="">written by : {{blog.create_by}}</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+
+{% endblock %}
