@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from images_urls import get_random_image
 from blogs.models import Blog
+
 # Typing imports
 from django.http import HttpRequest
 from django.shortcuts import HttpResponse
@@ -33,11 +34,15 @@ def category_page(request: HttpRequest, category_name: str) -> HttpResponse:
 
     category_list = CategoryList.objects.filter(category_name=_c)
     _category_list = []
-    
+
     for _ in category_list:
         if _.blog.is_approved and not _.blog.is_archived:
             _category_list.append(_)
-            
-    context: dict = {"category": _c, "category_list": _category_list, "image_func": get_random_image}
+
+    context: dict = {
+        "category": _c,
+        "category_list": _category_list,
+        "image_func": get_random_image,
+    }
 
     return render(request, "categories/categorypage.html", context=context)

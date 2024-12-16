@@ -42,12 +42,11 @@ INSTALLED_APPS = [
     "categories",
     "siteusers",
     # Installed Apps
-
     "crispy_forms",
     "widget_tweaks",
     "django_browser_reload",
-    'django_prose_editor',
-    'ckeditor'
+    "django_prose_editor",
+    "ckeditor",
 ]
 
 
@@ -134,7 +133,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CKEDITOR_CONFIGS = {
-    'default': {
-        'width': 'full', 
+    "default": {
+        "width": "full",
     },
 }

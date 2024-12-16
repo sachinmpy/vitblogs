@@ -21,5 +21,5 @@ urlpatterns = [
     path("blogs/create-blog", create_blog, name="create_blog"),
     path("blogs/unverified-blogs", unverifed_blogs, name="unverified_blogs"),
     path("blogs/verify-blog/<str:blog_id>", verify_blog, name="verify_blog"),
-    path("blogs/archive-blog/<str:blog_id>", archive_blog, name='archive_blog'),
+    path("blogs/archive-blog/<str:blog_id>", archive_blog, name="archive_blog"),
 ]

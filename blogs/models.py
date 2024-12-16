@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django_prose_editor.fields import ProseEditorField
 from ckeditor.fields import RichTextField
+
 # Todo
 # - Implement "TAGS"
 
@@ -49,4 +50,3 @@ class Tags(models.Model):
 
     def __str__(self):
         return f"{self.tag}"
-

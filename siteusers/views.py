@@ -94,12 +94,15 @@ def registeruser(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             messages.success(request, message=f"Account Has Been Created")
             _u = form.save(commit=False)
-            _u.set_password(form.cleaned_data['password'])
+            _u.set_password(form.cleaned_data["password"])
             _u.save()
             return redirect("loginuser")  # IMPLEMENT THIS FUTURE ME
 
         else:
-            messages.error(request, message="Something Went Wrong! maybe username has been already taken")
+            messages.error(
+                request,
+                message="Something Went Wrong! maybe username has been already taken",
+            )
             return redirect("register")
 
     context: dict = {

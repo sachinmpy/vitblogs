@@ -12,11 +12,11 @@ image_link = [
     "https://i.pinimg.com/originals/2c/82/e2/2c82e2b93fb894326e61b324a984c8d1.gif",
     "https://i.pinimg.com/originals/b5/17/fb/b517fbc2fbde6f876d88740adf891d04.gif",
     "https://i.pinimg.com/originals/2f/66/ed/2f66edebc84cc96b7614cf81d33713df.gif",
-    
-    
 ]
+
 
 def get_random_image():
     return random.choice(image_link)
+
 
 print(get_random_image())

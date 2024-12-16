@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from blogs.models import Blog
 from images_urls import get_random_image
+
 # Typing imports
 from django.http import HttpRequest
 from django.shortcuts import HttpResponse

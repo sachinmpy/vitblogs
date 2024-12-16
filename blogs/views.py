@@ -37,7 +37,7 @@ def blog_page(request: HttpRequest) -> HttpResponse:  # Not Working
 
     _blogs = Blog.objects.filter(is_approved=True).exclude(is_archived=True)
 
-    context: dict = {"blogs": _blogs,  "image_func": get_random_image}
+    context: dict = {"blogs": _blogs, "image_func": get_random_image}
 
     return render(request, "blogs/allblogs.html", context=context)
 
@@ -85,13 +85,9 @@ def create_blog(request: HttpRequest) -> HttpResponse:
     """
 
     user = request.user
-    form = BlogCreationForm(
-        {"create_by": user}
-    )
+    form = BlogCreationForm({"create_by": user})
 
     context: dict = {"form": form}
-
-    
 
     # Reciving to create and save forms
     if request.method == "POST":
@@ -225,7 +221,7 @@ def archive_blog(
     request: HttpRequest, blog_id: str
 ) -> HttpResponseRedirect:  # Not working
     """
-    function that will archive blog 
+    function that will archive blog
 
     Parameters
     ----------
